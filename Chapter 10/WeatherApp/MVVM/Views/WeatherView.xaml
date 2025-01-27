@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.MVVM.Views.WeatherView"
+             xmlns:converter="clr-namespace:WeatherApp.Converters"
+             Title="WeatherView">
+    <ContentPage.Resources>
+        <converter:WeatherCodeToStringConverter x:Key="WeatherCodeToStringConverter" />
+        <converter:WeatherCodeToImageConverter x:Key="WeatherCodeToImageConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20"
+                             Padding="10,0"
+                             VerticalOptions="StartAndExpand">
+            <SearchBar x:Name="searchBar"
+                       Placeholder="Search"
+                       SearchCommand="{Binding SearchCommand}"
+                       SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"
+                       VerticalOptions="Center" />
+            <Label Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   HorizontalOptions="Center" />
+            <Label Text="{Binding PlaceName}"
+                   HorizontalOptions="Center" />
+            <Image Source="{Binding Weather.current.weathercode, Converter={StaticResource WeatherCodeToImageConverter}}"
+                   HeightRequest="200"
+                   HorizontalOptions="Center" />
+            <Label Text="{Binding Weather.current.temperature_2m, StringFormat='{0} °C'}"
+                   HorizontalOptions="Center" />
+            <Label Text="{Binding Weather.current.weathercode, Converter={StaticResource WeatherCodeToStringConverter}}"
+                   HorizontalOptions="Center" />
+            <Label Text="7 days Weather Forecast"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   HorizontalOptions="Center" />
+            <CollectionView x:Name="weatherforecast"
+                            ItemsSource="{Binding Weather.dailyForecasts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Beige"
+                              Margin="10"
+                              HeightRequest="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding weathercode, Converter={StaticResource WeatherCodeToImageConverter}}"
+                                   Grid.RowSpan="3"
+                                   Margin="10" />
+                            <Label Grid.Column="1"
+                                   Padding="5,0"
+                                   Text="{Binding time}"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Padding="5,0"
+                                   Text="{Binding weathercode, Converter={StaticResource WeatherCodeToStringConverter}}"
+                                   VerticalOptions="Center" />
+                            <HorizontalStackLayout Grid.Column="1"
+                                                   Padding="5,0"
+                                                   HorizontalOptions="StartAndExpand"
+                                                   Grid.Row="2"
+                                                   Spacing="20">
+                                <Label Text="{Binding temperature_2m_max, StringFormat='Max: {0:F1} °C'}"
+                                       VerticalOptions="Center" />
+                                <Label Text="|" VerticalOptions="Center" />
+                                <Label Text="{Binding temperature_2m_min, StringFormat='Min: {0:F1} °C'}"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

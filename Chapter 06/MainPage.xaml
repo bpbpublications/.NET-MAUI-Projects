@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColorPicker.MainPage">
+
+    <Grid x:Name="AppBackground">
+        <Frame Margin="10,0,10,0"
+               VerticalOptions="Center">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 Spacing="20">
+                <Label Text="Red Value:"></Label>
+                <Slider x:Name="rValue"
+                        ValueChanged="slrValue_ValueChanged"></Slider>
+                <Label Text="Green Value:"></Label>
+                <Slider x:Name="gValue"
+                        ValueChanged="slrValue_ValueChanged"></Slider>
+                <Label Text="Blue Value:"></Label>
+                <Slider x:Name="bValue"
+                        ValueChanged="slrValue_ValueChanged"></Slider>
+                <Button Text="Generate Random Color"
+                        Clicked="Button_Clicked"></Button>
+                <Frame HorizontalOptions="Center">
+                    <HorizontalStackLayout>
+                        <Label x:Name="rgbValue"
+                               VerticalOptions="Center"></Label>
+                        <ImageButton x:Name="copyBtn"
+                                     Source="clipboard_icon.svg"
+                                     HeightRequest="25"
+                                     WidthRequest="25"
+                                     Margin="10,0,0,0"
+                                     Clicked="copyBtn_Clicked"></ImageButton>
+                    </HorizontalStackLayout>
+                </Frame>
+                <Label x:Name="lblInfo" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TipCalculator.MainPage">
+
+    <Grid Padding="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition Height="0.125*"></RowDefinition>
+            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition Height="0.125*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Frame"
+                   x:Key="centerFrame">
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+            <Style TargetType="Button"
+                   x:Key="splitButton">
+                <Setter Property="BackgroundColor"
+                        Value="Orange" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="HeightRequest"
+                        Value="50" />
+                <Setter Property="WidthRequest"
+                        Value="50" />
+                <Setter Property="FontSize"
+                        Value="Body" />
+            </Style>
+            <Style TargetType="Label"
+                   x:Key="displayValue">
+                <Setter Property="FontSize"
+                        Value="36" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+            </Style>
+        </Grid.Resources>
+        <Frame Background="LightBlue"
+               Margin="10"
+               Grid.ColumnSpan="2">
+            <VerticalStackLayout Style="{StaticResource centerFrame}">
+                <Label Text="ENTER BILL AMOUNT" />
+                <Entry x:Name="tbTotal"
+                       FontSize="36"
+                       FontAttributes="Bold"
+                       Keyboard="Numeric"
+                       Completed="tbTotal_Completed" />
+            </VerticalStackLayout>
+        </Frame>
+        <Frame Background="LightSteelBlue"
+               Margin="10,10,5,5"
+               Grid.Row="1">
+            <VerticalStackLayout Style="{StaticResource centerFrame}">
+                <Label Text="TIP %" />
+                <Label x:Name="lblTip"
+                       Style="{StaticResource displayValue}" />
+            </VerticalStackLayout>
+        </Frame>
+        <Frame Background="LightGreen"
+               Margin="5,10,10,5"
+               Grid.Row="1"
+               Grid.Column="2">
+            <VerticalStackLayout Style="{StaticResource centerFrame}">
+                <Label Text="TIP AMOUNT" />
+                <Label x:Name="lblTipAmount"
+                       Style="{StaticResource displayValue}" />
+            </VerticalStackLayout>
+        </Frame>
+        <Frame Background="Beige"
+               Margin="10,5,10,10"
+               Grid.Row="2"
+               Grid.ColumnSpan="2">
+            <VerticalStackLayout Style="{StaticResource centerFrame}">
+                <Label Text="SELECT TIP" />
+                <Slider x:Name="slrTip"
+                        Minimum="0"
+                        Maximum="50"
+                        WidthRequest="300"
+                        ThumbColor="Orange"
+                        MinimumTrackColor="Orange"
+                        MaximumTrackColor="Red"
+                        ValueChanged="slrTip_ValueChanged" />
+            </VerticalStackLayout>
+        </Frame>
+        <Frame Background="LightSteelBlue"
+               Margin="10,10,5,5"
+               Grid.Row="3">
+            <VerticalStackLayout Style="{StaticResource centerFrame}">
+                <Label Text="SPLIT BETWEEN" />
+                <Label x:Name="lblSplit"
+                       Style="{StaticResource displayValue}" />
+            </VerticalStackLayout>
+        </Frame>
+        <Frame Background="LightGreen"
+               Margin="5,10,10,5"
+               Grid.Row="3"
+               Grid.Column="2">
+            <VerticalStackLayout Style="{StaticResource centerFrame}">
+                <Label Text="SPLIT AMOUNT" />
+                <Label x:Name="lblSplitAmount"
+                       Style="{StaticResource displayValue}" />
+            </VerticalStackLayout>
+        </Frame>
+        <Frame Background="Beige"
+               Margin="10,5,10,10"
+               Grid.Row="4"
+               Grid.ColumnSpan="2">
+            <HorizontalStackLayout Style="{StaticResource centerFrame}">
+                <Button x:Name="btnMinus"
+                        Style="{StaticResource splitButton}"
+                        Text="-"
+                        Clicked="btnMinus_Clicked"></Button>
+                <Label Margin="10,0"
+                       VerticalOptions="Center"
+                       Text="SELECT NO. OF PERSONS" />
+                <Button x:Name="btnPlus"
+                        Style="{StaticResource splitButton}"
+                        Text="+"
+                        Clicked="btnPlus_Clicked"></Button>
+            </HorizontalStackLayout>
+        </Frame>
+    </Grid>
+
+</ContentPage>
